@@ -1,0 +1,32 @@
+import mysql.connector
+from mysql.connector import Error
+
+try:
+    conexion = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='Mig@1732',
+        database='farmauis_db'
+    )
+    
+    if conexion.is_connected():
+        print("✅ Conexión exitosa a MySQL")
+        
+        # Obtener información del servidor
+        cursor = conexion.cursor()
+        cursor.execute("SELECT DATABASE();")
+        bd_actual = cursor.fetchone()
+        print(f"Base de datos conectada: {bd_actual[0]}")
+        
+        cursor.execute("SELECT VERSION();")
+        version = cursor.fetchone()
+        print(f"Versión de MySQL: {version[0]}")
+        
+except Error as e:
+    print(f"❌ Error de conexión: {e}")
+    
+finally:
+    if 'conexion' in locals() and conexion.is_connected():
+        cursor.close()
+        conexion.close()
+        print("Conexión cerrada")
