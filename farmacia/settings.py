@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'inventario',  # Your app name
     'rest_framework',  # Django REST framework
     'productos',
+    'ventas',
+    'personas',
+    'reportes',
 ]
 
 MIDDLEWARE = [
